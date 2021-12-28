@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM docker.io/library/alpine:latest
 
 ENV TERM xterm-256color
 
@@ -10,10 +10,11 @@ RUN apk add --no-cache \
     git \
     git-perl \
     less \
-    man \
+    man-pages \
+    man-db \
     ncurses \
     perl \
-    python \
+    python3 \
     tmux \
     vim \
     wget \
@@ -21,6 +22,7 @@ RUN apk add --no-cache \
     zsh-doc \
     zsh-vcs \
     && \
+    ln -sf python3 /usr/bin/python && \
     usermod -s /bin/zsh root && \
     useradd -m -s /bin/zsh tester && \
     echo 'tester  ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
